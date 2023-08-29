@@ -1,0 +1,8 @@
+{
+    "env": {
+        "MONGO_USER": "your-username",
+        "MONGO_PASSWORD": "your-password",
+        "MONGO_DB": "your-db-name",
+        "URI": "mongodb://127.0.0.1:27017/todo-app"
+    }
+}
