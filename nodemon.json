@@ -3,6 +3,7 @@
         "MONGO_USER": "your-username",
         "MONGO_PASSWORD": "your-password",
         "MONGO_DB": "your-db-name",
-        "URI": "mongodb://127.0.0.1:27017/todo-app"
+        "URI": "mongodb://127.0.0.1:27017/todo-app",
+        "JWT": "8hEnPGeoBqGUT6zksxt4G95gW+uMdzwe7EVaRnp0xRI="
     }
 }
