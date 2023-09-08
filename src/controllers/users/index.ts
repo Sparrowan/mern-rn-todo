@@ -11,7 +11,6 @@ import { userSchema } from "../../yup/userSchema";
 const userRegister = async (req: Request, res: Response): Promise<void> => {
     try {
         const body = req.body as Pick<IUser, "name" | "email" | "password">
-        console.log(body)
         await userSchema.validate({
             body: body,
         });

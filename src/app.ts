@@ -8,6 +8,7 @@ const app: Express = express()
 const PORT: string | number = process.env.PORT || 4000
 
 app.use(cors())
+app.use(express.json());
 app.use(todoRoutes)
 
 const uri: string = process.env.URI!
@@ -20,6 +21,5 @@ mongoose
         )
     )
     .catch(error => {
-        console.log(error)
         throw error
     })
