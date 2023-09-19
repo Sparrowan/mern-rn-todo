@@ -3,7 +3,6 @@ import { IUser } from "./../../types/user"
 import User from "../../models/user"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { userSchema } from "../../yup/userSchema";
 
 
 
@@ -11,9 +10,6 @@ import { userSchema } from "../../yup/userSchema";
 const userRegister = async (req: Request, res: Response): Promise<void> => {
     try {
         const body = req.body as Pick<IUser, "name" | "email" | "password">
-        await userSchema.validate({
-            body: body,
-        });
         const salt = bcrypt.genSaltSync(10);
         const password_hash = bcrypt.hashSync(body.password, salt);
         const user: IUser = new User({
@@ -54,18 +50,15 @@ const userLogin = async (req: Request, res: Response): Promise<void> => {
                 .json({ message: "Wrong Password!" })
             return
         }
-        const token = jwt.sign(
+        const accessToken = jwt.sign(
             { id: user._id },
             process.env.JWT!
         );
 
         const { password, ...otherDetails } = user;
         res
-            .cookie("access_token", token, {
-                httpOnly: true,
-            })
             .status(200)
-            .json({ details: { ...otherDetails } });
+            .json({ details: { ...otherDetails, accessToken } });
     } catch (error) {
         throw error
     }

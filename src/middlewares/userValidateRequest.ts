@@ -1,7 +1,7 @@
 import { AnyObjectSchema } from 'yup'
 import { Request, Response, NextFunction } from 'express'
 
-const validate = (schema: AnyObjectSchema) => async (
+const validateRegister = (schema: AnyObjectSchema) => async (
     req: Request,
     res: Response,
     next: NextFunction) => {
@@ -19,4 +19,24 @@ const validate = (schema: AnyObjectSchema) => async (
     }
 
 }
-export default validate
+
+const validateLogin = (schema: AnyObjectSchema) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction) => {
+    try {
+        await schema.validate({
+            body: req.body,
+            query: req.query,
+            params: req.params
+        })
+        next()
+    }
+    catch (e: any) {
+        return res.status(400).send(e)
+
+    }
+
+}
+
+export  {validateRegister, validateLogin}
