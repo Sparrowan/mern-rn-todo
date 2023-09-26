@@ -5,7 +5,8 @@
   "main": "dist/js/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "concurrently \"tsc -w\" \"nodemon dist/js/app.js\""
+    "dev": "concurrently \"tsc -w\" \"nodemon dist/js/app.js\"",
+    "start": "concurrently \"tsc -w\" \"start dist/js/app.js\""
   },
   "keywords": [],
   "author": "",
@@ -20,11 +21,12 @@
   "dependencies": {
     "@types/cors": "^2.8.13",
     "@types/mongoose": "^5.11.97",
-    "@types/node": "^20.5.7",
+    "@types/node": "^20.6.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "concurrently": "^8.2.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.5",

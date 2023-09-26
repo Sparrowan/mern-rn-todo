@@ -1,9 +1,12 @@
 import { Response, Request } from "express"
-import { ITodo } from "./../../types/todo"
+import { ITodo, RequestTodo } from "./../../types/todo"
 import Todo from "../../models/todo"
+import { authUser } from "./../../types/user"
 
 const getTodos = async (req: Request, res: Response): Promise<void> => {
     try {
+        console.log(req.body.user.id)
+
         const todos: ITodo[] = await Todo.find()
         res.status(200).json({ todos })
     } catch (error) {
@@ -13,12 +16,14 @@ const getTodos = async (req: Request, res: Response): Promise<void> => {
 
 const addTodo = async (req: Request, res: Response): Promise<void> => {
     try {
-        const body = req.body as Pick<ITodo, "name" | "description" | "status">
+        const body = req.body as RequestTodo
+        console.log(body.user)
 
         const todo: ITodo = new Todo({
             name: body.name,
             description: body.description,
-            status: body.status,
+            status: false,
+            userId: body.user.id
         })
 
         const newTodo: ITodo = await todo.save()
